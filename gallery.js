@@ -1,12 +1,17 @@
 function supports_history_api() {
-  return !!(window.history && history.pushState);
+  var soportado = false;
+  if(Modernizr.history){
+    soportado = true;
+  }else{
+    soportado = false;
+  }
+  return soportado;
 }
 
 function swapPhoto(href) {
   var req = new XMLHttpRequest();
   req.open("GET",
-           "http://gsyc.es/~grex/history_api/gallery/" +
-             href.split("/").pop(),
+           "./gallery/" + href.split("/").pop(),
            false);
   req.send(null);
   if (req.status == 200) {
@@ -40,4 +45,3 @@ window.onload = function() {
     }, false);
   }, 1);
 }
-
